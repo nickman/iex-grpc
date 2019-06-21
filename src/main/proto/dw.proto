@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package drivewealth.instrument;
+
+
+import "money/money.proto";
+import "exchange.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.drivewealth.grpc.api.instrument";
+option java_multiple_files = true;
+
+enum InstrumentCategory {
+	UNKNOWN = 0;
+	AGENCY = 1;
+	COMMODITY = 2;
+	CORPORATE = 3;
+	CURRENCY = 4;
+	EQUITY = 5;
+	GOVERNMENT = 6;
+	INDEX = 7;
+	LOAN = 8;
+	MONEYMARKET = 9;
+	MORTGAGE = 10;
+	MUNICIPAL = 11;
+	OTHER = 12;
+	FINANCING = 13;	
+}
+
+message Tag {
+	string tag = 1;
+}
+message Tags {
+	repeated Tag tags = 1;
+}
+
+enum TradeStatus {
+	INACTIVE = 0;
+	ACTIVE = 1;
+	CLOSE = 2;
+}
+
+message Instrument {
+	string instrumentId = 10;
+	string name = 20;
+	money.Currency currencyId = 30;
+	string description = 40;
+	exchange.Exchange exchangeID = 50;
+	int32 limitStatus = 60;
+	int32 instrumentTypeId = 70;
+	bool longOnly = 80;
+	money.Currency marginCurrencyId = 90;
+	int64 orderSizeMax = 100;
+	double orderSizeMin = 110;
+	double orderSizeStep = 120;
+	money.Money rateAsk = 130;
+	money.Money rateBid = 140;
+	int32 ratePrecision = 150;
+	string symbol = 160;
+	Tags tags = 170;
+	TradeStatus tradeStatus = 180;
+	string tradingHours = 190;
+	string uom = 200;
+	string urlImage = 210;
+	string urlInvestor = 220;
+	string sector = 230;
+	money.Money priorClose = 240;
+	string nameLower = 250;
+	string underlyingID = 260;
+	int32 marketState = 270;
+	float minTic = 280;
+	float pipMultiplier = 290;
+	string tickerSymbol = 300;
+	float rebateSpread = 310;
+}
+
+enum ShortType {
+	NA  = 0;
+	CS = 1;
+	ET = 2;
+	PS = 3;
+	BO = 4;
+	SU = 5;
+	CRYPTO = 6;
+}
+
+message ShortInstrument {
+	string symbol = 10;
+	string name = 20;
+	google.protobuf.Timestamp date = 30;
+	bool enabled = 40;
+	ShortType type = 50;
+	int32 iexId = 60;	
+}
+
+// [{"symbol":"A","name":"Agilent Technologies Inc.","date":"2019-01-23","isEnabled":true,"type":"cs","iexId":"2"}]
+
+message GetInstrumentRequest {
+	oneof request {
+		string instrumentId = 10;
+		string symbol = 160;
+	}
+}
+
+message LastTrade {
+	string symbol = 10;
+	double price = 20;
+	int64 size = 30;
+	int64 time = 40;
+	int64 seq = 50;
+}
+
+service InstrumentService {
+	rpc GetInstrument(GetInstrumentRequest) returns (Instrument) {
+		
+	}
+}

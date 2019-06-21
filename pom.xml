@@ -1,0 +1,314 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.heliosapm.fixml.grpc</groupId>
+    <artifactId>grpc-namespace</artifactId>    
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>grpc :: FIXML</name>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.1.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <compiler-source.version>1.8</compiler-source.version>
+        <compiler-target.version>1.8</compiler-target.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.M3</spring-cloud.version>             
+        <spring.version>5.1.4.RELEASE</spring.version>  
+        <grpc.version>1.18.0</grpc.version>
+        <protobuf.version>3.6.1</protobuf.version>
+        <salesforce.version>0.9.0</salesforce.version>
+        <salesforce-grpc.version>0.8.1</salesforce-grpc.version>
+        <grpc-prometheus.version>0.3.0</grpc-prometheus.version>
+        <prometheus-client.version>0.5.0</prometheus-client.version>
+        <javassist.version>3.12.1.GA</javassist.version>
+        <bytebuddy.version>1.7.11</bytebuddy.version>
+        <annox.version>1.0.2</annox.version>
+        <guava.version>23.0</guava.version>
+        <jackson.version>2.9.8</jackson.version>
+        <reflections.version>0.9.10</reflections.version>
+        <serious.version>1.0-SNAPSHOT</serious.version>
+        <junit.version>4.12</junit.version>
+        <micrometer.version>1.1.2</micrometer.version>
+        <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
+        <jctools.version>2.1.2</jctools.version>
+        <reactivestreams.version>1.0.2</reactivestreams.version>
+        <reactor.version>3.2.5.RELEASE</reactor.version>
+        <dynamo.version>1.11.486</dynamo.version>
+        <socket-io.version>1.0.0</socket-io.version>
+        <asynchttpclient.version>2.5.2</asynchttpclient.version>     
+        <kafka.version>2.1.0</kafka.version>   
+        <reactor-kafka.version>1.1.0.RELEASE</reactor-kafka.version>
+        <source-plugin.version>3.0.1</source-plugin.version>
+        <javadoc-plugin.version>3.0.1</javadoc-plugin.version>
+    </properties>
+
+
+    <dependencies>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-webflux</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>      
+      
+		<dependency>
+		  <groupId>io.projectreactor.kafka</groupId>
+		  <artifactId>reactor-kafka</artifactId>
+		  <version>${reactor-kafka.version}</version>
+		</dependency>
+      
+		<dependency>
+		  <groupId>io.projectreactor.kafka</groupId>
+		  <artifactId>reactor-kafka-tools</artifactId>
+		  <version>${reactor-kafka.version}</version>
+		</dependency>
+			
+  		<dependency>
+  		  <groupId>com.google.guava</groupId>
+  		  <artifactId>guava</artifactId>
+  		  <version>${guava.version}</version>
+  		</dependency>			
+  			            
+      <dependency>
+        <groupId>com.salesforce.servicelibs</groupId>
+        <artifactId>reactor-grpc-stub</artifactId>
+        <version>${salesforce.version}</version>
+      </dependency>
+      
+		<dependency>
+		    <groupId>org.apache.kafka</groupId>
+		    <artifactId>kafka-clients</artifactId>
+		    <version>${kafka.version}</version>
+		</dependency>
+      
+      
+      <dependency>
+        <groupId>io.socket</groupId>
+        <artifactId>socket.io-client</artifactId>
+        <version>${socket-io.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+    
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-core</artifactId>
+        <version>${micrometer.version}</version>
+      </dependency>
+      
+		<dependency>
+		  <groupId>com.amazonaws</groupId>
+		  <artifactId>aws-java-sdk-dynamodb</artifactId>
+		  <version>${dynamo.version}</version>
+		</dependency>
+      
+              
+      <dependency>
+          <groupId>io.grpc</groupId>
+          <artifactId>grpc-netty</artifactId>
+            <exclusions>
+            	<exclusion>
+  		          <groupId>com.google.guava</groupId>
+  		          <artifactId>guava</artifactId>
+            	</exclusion>
+            </exclusions>    
+          <version>${grpc.version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>io.grpc</groupId>
+          <artifactId>grpc-protobuf</artifactId>
+            <exclusions>
+            	<exclusion>
+          		  <groupId>com.google.guava</groupId>
+          		  <artifactId>guava</artifactId>
+            	</exclusion>
+            </exclusions>          
+          <version>${grpc.version}</version>
+      </dependency>
+
+
+      <dependency>
+          <groupId>io.grpc</groupId>
+          <artifactId>grpc-stub</artifactId>
+          <version>${grpc.version}</version>
+      </dependency>
+      
+      <dependency>
+          <groupId>io.grpc</groupId>
+          <artifactId>grpc-services</artifactId>
+          <version>${grpc.version}</version>
+      </dependency>
+      
+      <dependency>
+          <groupId>io.grpc</groupId>
+          <artifactId>grpc-core</artifactId>
+          <version>${grpc.version}</version>
+      </dependency>
+      
+      <dependency>
+          <groupId>io.grpc</groupId>
+          <artifactId>grpc-context</artifactId>
+          <version>${grpc.version}</version>
+      </dependency>
+      
+        <dependency>
+          <groupId>com.google.protobuf</groupId>
+          <artifactId>protobuf-java-util</artifactId>
+          <version>${protobuf.version}</version>
+        </dependency>
+      
+          
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      
+           
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+        
+      <dependency>
+        <groupId>org.reactivestreams</groupId>
+        <artifactId>reactive-streams</artifactId>
+        <version>${reactivestreams.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-core</artifactId>
+        <version>${reactor.version}</version>
+      </dependency>
+            
+    </dependencies>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.6.1</version>
+            </extension>
+        </extensions>
+        <plugins>
+
+		<!-- Generates Proto3 from a swagger doc
+        <plugin>
+          <artifactId>exec-maven-plugin</artifactId>
+          <groupId>org.codehaus.mojo</groupId>
+          <version>1.6.0</version>
+          <executions>
+            <execution>
+              <id>Generate Proto From Swagger</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+              <configuration>
+                <executable>openapi2proto</executable>
+                <commandlineArgs>-spec ${basedir}/model/namespace.yml -annotate -out ${basedir}/src/main/proto/namespace.proto</commandlineArgs>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>        -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${compiler-source.version}</source>
+                    <target>${compiler-target.version}</target>
+                </configuration>
+            </plugin>
+
+
+           <plugin>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-maven-plugin</artifactId>
+              <version>2.1.2.RELEASE</version>
+              <!-- 
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>repackage</goal>
+                  </goals>
+                </execution>
+              </executions>
+              -->
+		      <configuration>
+		      	<!-- This isn't really needed here, but the plugin jar needs to have a default main -->
+		      	<mainClass>com.squarespace.service.codegen.generators.ModelReportGenerator</mainClass>
+		        <addResources>true</addResources>
+                <executable>false</executable>
+				<layout>JAR</layout>
+				<classifier>jdk8</classifier>		        
+		      </configuration>				
+            </plugin>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <configuration>
+                    <protocArtifact>com.google.protobuf:protoc:3.6.1:exe:${os.detected.classifier}</protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+                    </pluginArtifact>
+                    <protoSourceRoot>
+                        ${basedir}/src/main/proto
+                    </protoSourceRoot>
+                    <protocPlugins>
+                        <protocPlugin>
+                            <id>reactor-grpc</id>
+                            <groupId>com.salesforce.servicelibs</groupId>
+                            <artifactId>reactor-grpc</artifactId>
+                            <version>0.9.0</version>
+                            <mainClass>com.salesforce.reactorgrpc.ReactorGrpcGenerator</mainClass>
+                            <args>logServiceContext=true</args>
+						    <jvmArgs>
+						    	-Dproject.output.dir=${project.build.outputDirectory}
+						    	-Dproject.version=${project.version}
+						    </jvmArgs>
+                        </protocPlugin>
+					</protocPlugins>                    
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
