@@ -37,7 +37,7 @@
         <serious.version>1.0-SNAPSHOT</serious.version>
         <junit.version>4.12</junit.version>
         <micrometer.version>1.1.2</micrometer.version>
-        <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
+        <spring-boot.version>2.5.12</spring-boot.version>
         <jctools.version>2.1.2</jctools.version>
         <reactivestreams.version>1.0.2</reactivestreams.version>
         <reactor.version>3.2.5.RELEASE</reactor.version>
