@@ -32,7 +32,7 @@
         <bytebuddy.version>1.7.11</bytebuddy.version>
         <annox.version>1.0.2</annox.version>
         <guava.version>23.0</guava.version>
-        <jackson.version>2.9.9</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <reflections.version>0.9.10</reflections.version>
         <serious.version>1.0-SNAPSHOT</serious.version>
         <junit.version>4.12</junit.version>
